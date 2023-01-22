@@ -11,7 +11,7 @@ game.Players.PlayerAdded:Connect(function(player)
 	folder.Parent = player
 
 	local currency = Instance.new("IntValue")
-        currency.Name = currencyName
+    currency.Name = currencyName
 	currency.Parent = folder
 	--currency.Value = 50 Replaced with if else statement below, all new players get 50 rings
 
