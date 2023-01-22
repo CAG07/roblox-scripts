@@ -1,10 +1,10 @@
 
 local currencyName = "Rings"
 
-local Players = game:GetService('Players')
+local Players = game:GetService("Players")
 local DataStore = game:GetService("DataStoreService"):GetDataStore("TestDataStore")
 
-Players.PlayerAdded:Connect(function(player)
+game.Players.PlayerAdded:Connect(function(player)
 
 	local folder = Instance.new("Folder")
 	folder.Name = "leaderstats"
@@ -24,6 +24,7 @@ Players.PlayerAdded:Connect(function(player)
 
 	if savedData ~= nil then
 		currency.Value = savedData
+		print("Data loaded")
 	else
 		--New player
 		currency.Value = 50
@@ -32,12 +33,12 @@ Players.PlayerAdded:Connect(function(player)
 
 end)
 
-	Players.PlayerRemoving:Connect(function(player)
+game.Players.PlayerRemoving:Connect(function(player)
 	local ID = currencyName.."-"..player.UserId
 	DataStore:SetAsync(ID,player.leaderstats[currencyName].Value)
 end)
 
-	game:BindToClose(function()
+game:BindToClose(function()
 
 	-- When game is ready to shut down
 	for i, player in pairs(game.Players:GetPlayers()) do
@@ -46,6 +47,8 @@ end)
 		end
 	end
 
-	wait(5)
+	--task.wait(5) is no longer required for the last player because this issue is fixed
 
 end)
+
+--27:00
